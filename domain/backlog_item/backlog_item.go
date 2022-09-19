@@ -21,7 +21,7 @@ type BacklogItem struct {
 	ID         ID     `json:"id"`
 	Type       Type   `json:"type"`
 	Summary    string `json:"summary"`
-	StoryPoint int    `json:"storyPoint"`
+	StoryPoint *int   `json:"storyPoint"`
 }
 
 type Repository interface {
