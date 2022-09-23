@@ -7,9 +7,32 @@ package sqlc
 
 import (
 	"context"
+	"database/sql"
 
 	"github.com/google/uuid"
 )
+
+const createBacklogItem = `-- name: CreateBacklogItem :exec
+INSERT INTO backlog_items (id, type, summary, story_point)
+VALUES ($1, $2, $3, $4)
+`
+
+type CreateBacklogItemParams struct {
+	ID         uuid.UUID
+	Type       BacklogType
+	Summary    string
+	StoryPoint sql.NullInt32
+}
+
+func (q *Queries) CreateBacklogItem(ctx context.Context, arg CreateBacklogItemParams) error {
+	_, err := q.db.ExecContext(ctx, createBacklogItem,
+		arg.ID,
+		arg.Type,
+		arg.Summary,
+		arg.StoryPoint,
+	)
+	return err
+}
 
 const getOneBacklogItem = `-- name: GetOneBacklogItem :one
 SELECT id, type, summary, story_point

@@ -25,5 +25,6 @@ type BacklogItem struct {
 }
 
 type Repository interface {
+	Create(ctx context.Context, item *BacklogItem) error
 	GetOne(ctx context.Context, id ID) (*BacklogItem, error)
 }
