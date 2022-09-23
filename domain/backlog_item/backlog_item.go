@@ -24,6 +24,10 @@ type BacklogItem struct {
 	StoryPoint *int   `json:"storyPoint"`
 }
 
+func (bi BacklogItem) Validate() error {
+	return nil
+}
+
 type Repository interface {
 	Create(ctx context.Context, item *BacklogItem) error
 	GetOne(ctx context.Context, id ID) (*BacklogItem, error)
