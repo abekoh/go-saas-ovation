@@ -6,13 +6,13 @@ import (
 	"github.com/abekoh/go-saas-ovation/domain/backlog_item"
 )
 
-func (u UsecaseImpl) CreateBacklog(ctx context.Context, param backlogitem.CreateBacklogItemParam) error {
+func (u UsecaseImpl) CreateBacklog(ctx context.Context, param backlogitem.CreateBacklogItemParam) (*backlogitem.BacklogItem, error) {
 	item, err := param.New()
 	if err != nil {
-		return err
+		return nil, err
 	}
 	if err := u.BacklogItemRepo.Create(ctx, item); err != nil {
-		return err
+		return nil, err
 	}
-	return nil
+	return item, nil
 }

@@ -7,7 +7,7 @@ import (
 )
 
 type Usecase interface {
-	CreateBacklog(ctx context.Context, param *backlogitem.CreateBacklogItemParam) error
+	CreateBacklog(ctx context.Context, param *backlogitem.CreateBacklogItemParam) (*backlogitem.BacklogItem, error)
 }
 
 type UsecaseImpl struct {

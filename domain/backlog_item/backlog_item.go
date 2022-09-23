@@ -8,6 +8,10 @@ import (
 
 type ID uuid.UUID
 
+func (i ID) String() string {
+	return uuid.UUID(i).String()
+}
+
 type Type string
 
 const (
