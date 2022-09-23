@@ -1,9 +1,10 @@
 version: "2"
 sql:
   - schema: "migration"
-    queries: "domain/backlog_item/postgres/query/query.sql"
+    queries:
+      - "domain/backlog_item/postgres/backlog_item.sql"
     engine: "postgresql"
     gen:
       go:
-        package: "postgres"
-        out: "domain/backlog_item/postgres"
+        package: "sqlc"
+        out: "sqlc"
