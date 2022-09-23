@@ -2,19 +2,62 @@
 
 package model
 
-type NewTodo struct {
-	Text   string `json:"text"`
-	UserID string `json:"userId"`
+import (
+	"fmt"
+	"io"
+	"strconv"
+)
+
+type BacklogItem struct {
+	ID         string      `json:"id"`
+	Type       BacklogType `json:"type"`
+	Summary    string      `json:"summary"`
+	StoryPoint *int        `json:"storyPoint"`
 }
 
-type Todo struct {
-	ID   string `json:"id"`
-	Text string `json:"text"`
-	Done bool   `json:"done"`
-	User *User  `json:"user"`
+type NewBacklogItem struct {
+	Type       BacklogType `json:"type"`
+	Summary    string      `json:"summary"`
+	StoryPoint *int        `json:"storyPoint"`
 }
 
-type User struct {
-	ID   string `json:"id"`
-	Name string `json:"name"`
+type BacklogType string
+
+const (
+	BacklogTypeStory BacklogType = "STORY"
+	BacklogTypeBug   BacklogType = "BUG"
+)
+
+var AllBacklogType = []BacklogType{
+	BacklogTypeStory,
+	BacklogTypeBug,
+}
+
+func (e BacklogType) IsValid() bool {
+	switch e {
+	case BacklogTypeStory, BacklogTypeBug:
+		return true
+	}
+	return false
+}
+
+func (e BacklogType) String() string {
+	return string(e)
+}
+
+func (e *BacklogType) UnmarshalGQL(v interface{}) error {
+	str, ok := v.(string)
+	if !ok {
+		return fmt.Errorf("enums must be strings")
+	}
+
+	*e = BacklogType(str)
+	if !e.IsValid() {
+		return fmt.Errorf("%s is not a valid BacklogType", str)
+	}
+	return nil
+}
+
+func (e BacklogType) MarshalGQL(w io.Writer) {
+	fmt.Fprint(w, strconv.Quote(e.String()))
 }

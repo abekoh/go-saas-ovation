@@ -11,14 +11,14 @@ import (
 	"github.com/abekoh/go-saas-ovation/graphql/model"
 )
 
-// CreateTodo is the resolver for the createTodo field.
-func (r *mutationResolver) CreateTodo(ctx context.Context, input model.NewTodo) (*model.Todo, error) {
-	panic(fmt.Errorf("not implemented: CreateTodo - createTodo"))
+// CreateBacklog is the resolver for the createBacklog field.
+func (r *mutationResolver) CreateBacklog(ctx context.Context, input model.NewBacklogItem) (*model.BacklogItem, error) {
+	panic(fmt.Errorf("not implemented: CreateBacklog - createBacklog"))
 }
 
-// Todos is the resolver for the todos field.
-func (r *queryResolver) Todos(ctx context.Context) ([]*model.Todo, error) {
-	panic(fmt.Errorf("not implemented: Todos - todos"))
+// BacklogItems is the resolver for the backlogItems field.
+func (r *queryResolver) BacklogItems(ctx context.Context) ([]*model.BacklogItem, error) {
+	panic(fmt.Errorf("not implemented: BacklogItems - backlogItems"))
 }
 
 // Mutation returns generated.MutationResolver implementation.

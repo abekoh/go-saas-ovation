@@ -1,28 +1,25 @@
-# GraphQL schema example
-#
-# https://gqlgen.com/getting-started/
-
-type Todo {
-  id: ID!
-  text: String!
-  done: Boolean!
-  user: User!
+type BacklogItem {
+    id: ID!
+    type: BacklogType!
+    summary: String!
+    storyPoint: Int
 }
 
-type User {
-  id: ID!
-  name: String!
+enum BacklogType {
+    STORY
+    BUG
 }
 
 type Query {
-  todos: [Todo!]!
+    backlogItems: [BacklogItem!]!
 }
 
-input NewTodo {
-  text: String!
-  userId: String!
+input NewBacklogItem {
+    type: BacklogType!
+    summary: String!
+    storyPoint: Int
 }
 
 type Mutation {
-  createTodo(input: NewTodo!): Todo!
+    createBacklog(input: NewBacklogItem!): BacklogItem!
 }
