@@ -17,6 +17,25 @@ const (
 
 type StoryPoint int
 
+type CreateBacklogItemParam struct {
+	Type       Type
+	Summary    string
+	StoryPoint *int
+}
+
+func (p CreateBacklogItemParam) New() (*BacklogItem, error) {
+	item := &BacklogItem{
+		ID:         ID(uuid.New()),
+		Type:       p.Type,
+		Summary:    p.Summary,
+		StoryPoint: p.StoryPoint,
+	}
+	if err := item.Validate(); err != nil {
+		return nil, err
+	}
+	return item, nil
+}
+
 type BacklogItem struct {
 	ID         ID     `json:"id"`
 	Type       Type   `json:"type"`
