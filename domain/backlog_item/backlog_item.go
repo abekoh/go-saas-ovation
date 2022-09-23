@@ -3,6 +3,7 @@ package backlogitem
 import (
 	"context"
 
+	subtask "github.com/abekoh/go-saas-ovation/domain/sub_task"
 	"github.com/google/uuid"
 )
 
@@ -51,7 +52,19 @@ func (bi BacklogItem) Validate() error {
 	return nil
 }
 
+type BacklogItemList []BacklogItem
+
 type Repository interface {
 	Create(ctx context.Context, item *BacklogItem) error
 	GetOne(ctx context.Context, id ID) (*BacklogItem, error)
 }
+
+type BacklogItemQuery struct {
+}
+
+type BacklogItemNode struct {
+	BacklogItem
+	subtask.SubTaskNodeList
+}
+
+type BacklogItemNodeList []BacklogItemNode

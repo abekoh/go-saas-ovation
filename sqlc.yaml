@@ -3,6 +3,7 @@ sql:
   - schema: "migration"
     queries:
       - "domain/backlog_item/postgres/backlog_item.sql"
+      - "usecase/query/postgres/usecase_query.sql"
     engine: "postgresql"
     gen:
       go:

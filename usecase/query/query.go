@@ -7,8 +7,5 @@ import (
 )
 
 type Queries interface {
-	GetBacklogs(ctx context.Context, param *backlogitem.CreateBacklogItemParam) (*backlogitem.BacklogItem, error)
-}
-
-type QueriesImpl struct {
+	GetBacklogItems(ctx context.Context, query *backlogitem.BacklogItemQuery) (backlogitem.BacklogItemNodeList, error)
 }

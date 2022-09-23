@@ -16,6 +16,14 @@ type SubTask struct {
 	BackLogItemID backlogitem.ID `json:"backLogItemId"`
 }
 
+type SubTaskList []SubTask
+
 type Repository interface {
 	GetOne(ctx context.Context, id ID) (*SubTask, error)
 }
+
+type SubTaskNode struct {
+	SubTask
+}
+
+type SubTaskNodeList []SubTaskNode
