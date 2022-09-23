@@ -1,4 +1,4 @@
-package backlogs
+package command
 
 import (
 	"context"
@@ -6,10 +6,10 @@ import (
 	"github.com/abekoh/go-saas-ovation/domain/backlog_item"
 )
 
-type Usecase interface {
+type Commands interface {
 	CreateBacklog(ctx context.Context, param *backlogitem.CreateBacklogItemParam) (*backlogitem.BacklogItem, error)
 }
 
-type UsecaseImpl struct {
+type CommandsImpl struct {
 	BacklogItemRepo backlogitem.Repository
 }

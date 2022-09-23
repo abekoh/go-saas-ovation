@@ -1,4 +1,4 @@
-package backlogs
+package command
 
 import (
 	"context"
@@ -6,7 +6,7 @@ import (
 	"github.com/abekoh/go-saas-ovation/domain/backlog_item"
 )
 
-func (u UsecaseImpl) CreateBacklog(ctx context.Context, param backlogitem.CreateBacklogItemParam) (*backlogitem.BacklogItem, error) {
+func (u CommandsImpl) CreateBacklog(ctx context.Context, param *backlogitem.CreateBacklogItemParam) (*backlogitem.BacklogItem, error) {
 	item, err := param.New()
 	if err != nil {
 		return nil, err
